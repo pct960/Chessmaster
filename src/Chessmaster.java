@@ -2,7 +2,7 @@ import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.JOptionPane;
-public class SingleplayerDirect extends Applet implements ActionListener
+public class Chessmaster extends Applet implements ActionListener
 {Board brain;Button b1,b2,b3;
     public void init()
     {super.init();
