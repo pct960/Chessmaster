@@ -139,6 +139,91 @@ public class Board extends Applet
             {infoBox("Game is a draw!","Game Status");
                 destroy();}}}}
 
+    public void genmove ()
+    {deep++;ababort = false;
+        if (deep % 2 != 0)
+        {minimax [deep] = 2000.0f;
+            alphabeta [deep] = 3000.0f;}
+        else
+        {minimax [deep] = -2000.0f;
+            alphabeta [deep] = -3000.0f;}
+        for (int i = 21; i < 99; i++)
+        {if (board [i] % 100 / 10 == color)
+            switch (board [i] % 10)
+            {
+                case 1:
+                    if (color == 1)
+                    {if (board [i-10] == 0)simulate ( i, i-10);
+                        if (board [i- 9] % 100 / 10 == 2)simulate ( i, i-9 );
+                        if (board [i-11] % 100 / 10 == 2)simulate ( i, i-11);
+                        if ( (i>80) && ( ( board [i-10] == 0) && (board [i-20] == 0))) simulate ( i, i-20);}
+                    else
+                    {if (board [i+10] == 0)simulate ( i, i+10);
+                        if (board [i+9] % 100 / 10 == 1)simulate (i, i+9);
+                        if (board [i+11] % 100 / 10 == 1)simulate (i, i+11);
+                        if ( (i<39) && ( (board [i+10] == 0) && (board [i+20] == 0)))simulate (i, i+20);}
+                    break;
+                case 2:
+                    simulate (i, i+12);
+                    simulate (i, i-12);
+                    simulate (i, i+21);
+                    simulate (i, i-21);
+                    simulate (i, i+19);
+                    simulate (i, i-19);
+                    simulate (i, i+8 );
+                    simulate (i, i-8 );
+                    break;
+                case 5:
+                case 3:
+                    multisimulate ( i,  -9);
+                    multisimulate ( i, -11);
+                    multisimulate ( i,  +9);
+                    multisimulate ( i, +11);
+                    if (board [i] % 10 == 3)break;
+                case 4:
+                    multisimulate (i, -10);
+                    multisimulate (i, +10);
+                    multisimulate (i,  -1);
+                    multisimulate (i,  +1);
+                    break;
+                case 6:
+                    if ((board [i] / 100 == 1) && (! ischeck ()))
+                    {if (((board [i+1] == 0) && (board [i+2] == 0)) && (board [i+3] / 100 == 1))
+                    {board [i+1] = board [i] % 100;
+                        board [i] = 0;
+                        if (! ischeck ())
+                        {board [i] = board [i+1];
+                            board [i + 1] = board [i + 3] % 100;
+                            board [i + 3] = 0;
+                            simulate (i, i+2);
+                            board [i + 3] = board [i + 1] + 100;
+                            board [i+1] = board [i];}
+                        board [i] = board [i + 1] + 100;
+                        board [i + 1] = 0;}
+                        if (((board [i-1] == 0) && (board [i-2] == 0)) && ((board [i-3] == 0) && (board [i-4] / 100 == 1)))
+                        {board [i-1] = board [i] % 100;
+                            board [i] = 0;
+                            if (! ischeck ())
+                            {board [i] = board [i-1];
+                                board [i - 1] = board [i - 4] % 100;
+                                board [i - 4] = 0;
+                                simulate (i, i-2);
+                                board [i - 4] = board [i - 1] + 100;
+                                board [i - 1] = board [i];}
+                            board [i] = board [i - 1] + 100;
+                            board [i - 1] = 0;}}
+                    simulate (i, i+1);
+                    simulate (i, i-1);
+                    simulate (i, i+10);
+                    simulate (i, i-10);
+                    simulate (i, i+9);
+                    simulate (i, i-9);
+                    simulate (i, i+11);
+                    simulate (i, i-11);	}
+            if ( i%10 == 8)i += 2;}
+        deep--;
+        ababort = false;}
+
     public void newgame() {
     }
 }
