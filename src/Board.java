@@ -224,6 +224,100 @@ public class Board extends Applet
         deep--;
         ababort = false;}
 
+    public boolean ischeck () {
+        int king = 0;
+        for ( int i = 21; i < 99; i++)
+        {if ((board [i] % 100 / 10 == color) && (board [i] % 10 == 6))
+        {king = i;
+            break;}
+            if ( i % 10 == 8)i += 2;}
+        if ((board [king-21] % 10 == 2) && (board [king-21] % 100 / 10 != color))return true;
+        if ((board [king+21] % 10 == 2) && (board [king+21] % 100 / 10 != color))return true;
+        if ((board [king-19] % 10 == 2) && (board [king-19] % 100 / 10 != color))return true;
+        if ((board [king+19] % 10 == 2) && (board [king+19] % 100 / 10 != color))return true;
+        if ((board [king- 8] % 10 == 2) && (board [king- 8] % 100 / 10 != color))return true;
+        if ((board [king+ 8] % 10 == 2) && (board [king+ 8] % 100 / 10 != color))return true;
+        if ((board [king-12] % 10 == 2) && (board [king-12] % 100 / 10 != color))return true;
+        if ((board [king+12] % 10 == 2) && (board [king+12] % 100 / 10 != color))return true;
+        int j = king;
+        while (board [j - 9] != 99)
+        {j -= 9;
+            if (board [j] % 100 / 10 == color)break;
+            if (board [j] == 0)
+                continue;
+            if ((board [j] % 10  == 3) || (board [j] % 10  == 5))return true;
+            else break;}
+        j = king;
+        while (board [j+9] != 99)
+        {j += 9;
+            if (board [j] % 100 / 10 == color)break;
+            if (board [j] == 0)continue;
+            if ((board [j] % 10 == 3) || (board [j] % 10 == 5))return true;
+            else break;}
+        j = king;
+        while (board [j-11] != 99)
+        {j -= 11;
+            if (board [j] % 100 / 10 == color)
+                break;
+            if (board [j] == 0)continue;
+            if ( (board [j] % 10 == 3) || (board [j] % 10 == 5))return true;
+            else break;}
+        j = king;
+        while (board [j+11] != 99)
+        {j +=11;
+            if (board [j] % 100 / 10 == color)break;
+            if (board [j] == 0)continue;
+            if ( (board [j] % 10 == 3) || (board [j] % 10 == 5))return true;
+            else break;}
+        j = king;
+        while (board [j-10] != 99)
+        {j -= 10;
+            if (board [j] % 100 / 10 == color)break;
+            if (board [j] == 0)continue;
+            if ((board [j] % 10 == 4) || (board [j] % 10 == 5))return true;
+            else break;}
+        j = king;
+        while (board [j+10] != 99)
+        {j += 10;
+            if (board [j] % 100 / 10 == color)break;
+            if (board [j] == 0)	continue;
+            if ((board [j] % 10 == 4) || (board [j] % 10 == 5))return true;
+            else break;}
+        j = king;
+        while (board [j-1] != 99)
+        {j -=1;
+            if (board [j] % 100 / 10 == color)break;
+            if (board [j] == 0)continue;
+            if ((board [j] % 10 == 4) || (board [j] % 10 == 5))return true;
+            else break;}
+        j = king;
+        while (board [j+1] != 99)
+        {j +=1;
+            if (board [j] % 100 / 10 == color)break;
+            if (board [j] == 0)continue;
+            if ((board [j] % 10 == 4) || (board [j] % 10 == 5))return true;
+            else break;}
+        if (color == 1)
+        {if ((board [king-11] % 10 == 1) && (board [king-11] % 100 / 10 == 2))return true;
+            if ((board [king- 9] % 10 == 1) && (board [king- 9] % 100 / 10 == 2))return true;}
+        else
+        {if ((board [king+11] % 10 == 1) && (board [king+11] % 100 / 10 == 1))return true;
+            if ((board [king+ 9] % 10 == 1) && (board [king+ 9] % 100 / 10 == 1)) return true;}
+        if ( board [king+ 1] % 10 == 6 )return true;
+        if ( board [king- 1] % 10 == 6 )return true;
+        if ( board [king+10] % 10 == 6 )return true;
+        if ( board [king-10] % 10 == 6 )return true;
+        if ( board [king+11] % 10 == 6 )return true;
+        if ( board [king-11] % 10 == 6 )return true;
+        if ( board [king+ 9] % 10 == 6 )return true;
+        if ( board [king- 9] % 10 == 6 )return true;
+        return false;}
+
+    public boolean isvalid (int move)
+    {for (int i = 0; i < movecounter; i++)
+    {if (movelist [i] == move)return true;}
+        return false;}
+
     public void newgame() {
     }
 }
