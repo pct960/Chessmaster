@@ -318,6 +318,56 @@ public class Board extends Applet
     {if (movelist [i] == move)return true;}
         return false;}
 
+    public void mouseClicked(java.awt.event.MouseEvent e)
+    {}
+    public void mouseDragged(java.awt.event.MouseEvent e)
+    {x = e.getX() / 80;
+        if(x<0)x = 0;
+        if (x > 7 )x = 7;
+        y = e.getY() / 80;
+        if (y < 0)y = 0;
+        if (y > 7 )y = 7;
+        end = 21 + y * 10 + x;
+        if ( end != alt)
+        {if	(alt != start)
+            paintField (alt);
+            if ( end != start)
+            {Graphics g = getGraphics ();
+                if ( (code != 1) && (isvalid (start * 100 + end) ))g.setColor (green);
+                else g.setColor (red);
+                g.fillRect (x * 80, y * 80, 80, 80);
+                try
+                {g.drawImage (pieces [graphboard [end] % 100 - 10], x * 80, y * 80, 80, 80, parent);}
+                catch (ArrayIndexOutOfBoundsException ex) {}}
+            alt = end;}}
+    public void mouseEntered(java.awt.event.MouseEvent e)
+    {}
+    public void mouseExited(java.awt.event.MouseEvent e)
+    {}
+    public void mouseMoved(java.awt.event.MouseEvent e)
+    {}
+    public void mousePressed(java.awt.event.MouseEvent e)
+    {x = e.getX() / 80;
+        if (x < 0)x = 0;
+        if (x > 7)x = 7;
+        y = e.getY() / 80;
+        if (y < 0)y = 0;
+        if (y > 7)y = 7;
+        start = 21 + y*10 + x;
+        alt = start;
+        end = start;
+        Graphics g = getGraphics ();
+        g.setColor (blue);
+        g.fillRect (x * 80, y * 80, 80, 80);
+        try
+        {g.drawImage (pieces [graphboard [start] % 100 - 10], x * 80, y * 80, 80, 80, parent);}
+        catch (ArrayIndexOutOfBoundsException ex) {}}
+    public void mouseReleased(java.awt.event.MouseEvent e)
+    {paintField (start);
+        paintField (end);
+        if ((code != 1) && (isvalid (start * 100 + end ) ))
+        {execute (start, end);}}
+
     public void newgame() {
     }
 }
