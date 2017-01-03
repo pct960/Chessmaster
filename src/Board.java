@@ -378,7 +378,34 @@ public class Board extends Applet
             simulate (start, to);}
         simulate(start, to);}
 
-    public void newgame() {
-    }
+    public void newgame ()
+    {if (parent != null)
+        parent.getAppletContext ().showStatus ("");
+        if (th != null)
+            th.stop ();
+        th = null;
+        int [] org = {
+                99,	99,	99,	99,	99,	99,	99,	99,	99,	99,
+                99,	99,	99,	99,	99,	99,	99,	99,	99,	99,
+                99,	124,22,	23,	25,	126,23,	22,	124,99,
+                99,	21,	21,	21,	21,	21,	21,	21,	21,	99,
+                99,	00,	00,	00,	00,	00,	00,	00,	00,	99,
+                99,	00,	00,	00,	00,	00,	00,	00,	00,	99,
+                99,	00,	00,	00,	00,	00,	00,	00,	00,	99,
+                99,	00,	00,	00,	00,	00,	00,	00,	00,	99,
+                99,	11,	11,	11,	11,	11,	11,	11,	11,	99,
+                99,	114,12,	13,	15,	116,13,	12,	114,99,
+                99,	99,	99,	99,	99,	99,	99,	99,	99,	99,
+                99,	99,	99,	99,	99,	99,	99,	99,	99,	99 };
+        for (int i=0; i < 120; i++)
+        {board [i] = org [i];
+            graphboard [i] = org [i];}
+        repaint ();
+        movecounter = 0;
+        color = 1;
+        deep = 0;
+        target = 4;
+        genmove ();
+        code = 0;}
 }
 }
