@@ -368,6 +368,16 @@ public class Board extends Applet
         if ((code != 1) && (isvalid (start * 100 + end ) ))
         {execute (start, end);}}
 
+    public void multisimulate (int start, int inc)
+    {int to = start;
+        while ((board [to + inc ] != 99) && (board [to + inc] % 100 / 10  != color))
+        {to += inc;
+            if (board [to] != 0)
+            {simulate (start, to);
+                return;}
+            simulate (start, to);}
+        simulate(start, to);}
+
     public void newgame() {
     }
 }
