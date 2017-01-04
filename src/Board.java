@@ -49,28 +49,28 @@ public class Board extends Applet
         super();
         alphabeta[0] = -3000.0f;
         newgame();
-        MediaTracker controler = new MediaTracker(ref);
-        pieces[1] = ref.getImage(ref.getCodeBase(), "wp.png");
-        pieces[2] = ref.getImage(ref.getCodeBase(), "wn.png");
-        pieces[3] = ref.getImage(ref.getCodeBase(), "wb.png");
-        pieces[4] = ref.getImage(ref.getCodeBase(), "wr.png");
-        pieces[5] = ref.getImage(ref.getCodeBase(), "wq.png");
-        pieces[6] = ref.getImage(ref.getCodeBase(), "wk.png");
-        pieces[11] = ref.getImage(ref.getCodeBase(), "bp.png");
-        pieces[12] = ref.getImage(ref.getCodeBase(), "bn.png");
-        pieces[13] = ref.getImage(ref.getCodeBase(), "bb.png");
-        pieces[14] = ref.getImage(ref.getCodeBase(), "br.png");
-        pieces[15] = ref.getImage(ref.getCodeBase(), "bq.png");
-        pieces[16] = ref.getImage(ref.getCodeBase(), "bk.png");
+        MediaTracker controller = new MediaTracker(ref);
+        pieces[1] = ref.getImage(ref.getCodeBase(), "/home/pct960/IdeaProjects/Chessmaster/src/wp.png");
+        pieces[2] = ref.getImage(ref.getCodeBase(), "/home/pct960/IdeaProjects/Chessmaster/src/wn.png");
+        pieces[3] = ref.getImage(ref.getCodeBase(), "/home/pct960/IdeaProjects/Chessmaster/src/wb.png");
+        pieces[4] = ref.getImage(ref.getCodeBase(), "/home/pct960/IdeaProjects/Chessmaster/src/wr.png");
+        pieces[5] = ref.getImage(ref.getCodeBase(), "/home/pct960/IdeaProjects/Chessmaster/src/wq.png");
+        pieces[6] = ref.getImage(ref.getCodeBase(), "/home/pct960/IdeaProjects/Chessmaster/src/wk.png");
+        pieces[11] = ref.getImage(ref.getCodeBase(), "/home/pct960/IdeaProjects/Chessmaster/src/bp.png");
+        pieces[12] = ref.getImage(ref.getCodeBase(), "/home/pct960/IdeaProjects/Chessmaster/src/bn.png");
+        pieces[13] = ref.getImage(ref.getCodeBase(), "/home/pct960/IdeaProjects/Chessmaster/src/bb.png");
+        pieces[14] = ref.getImage(ref.getCodeBase(), "/home/pct960/IdeaProjects/Chessmaster/src/br.png");
+        pieces[15] = ref.getImage(ref.getCodeBase(), "/home/pct960/IdeaProjects/Chessmaster/src/bq.png");
+        pieces[16] = ref.getImage(ref.getCodeBase(), "/home/pct960/IdeaProjects/Chessmaster/src/bk.png");
         for (int i = 1; i < 7; i++) {
-            controler.addImage(pieces[i], 0);
-            controler.addImage(pieces[i + 10], 0);
+            controller.addImage(pieces[i], 0);
+            controller.addImage(pieces[i + 10], 0);
         }
         try {
-            controler.waitForAll();
+            controller.waitForAll();
         } catch (InterruptedException e) {
             System.out.println("Images not successfull loaded - Trying again ...");
-            controler.checkID(0, true);
+            controller.checkID(0, true);
         }
         parent = ref;
         addMouseListener(this);
@@ -407,7 +407,7 @@ public class Board extends Applet
         target = 4;
         genmove ();
         code = 0;}
-}
+
     public void paint (Graphics g) {
         for ( int i = 21; i < 99; i++)
         {paintField (i);
@@ -425,4 +425,69 @@ public class Board extends Applet
         {g.drawImage (pieces [graphboard [index] % 100 - 10], x * 80, y * 80, 80, 80, parent);
         }
         catch (ArrayIndexOutOfBoundsException e) {}	}
-}
+
+    public void run()
+    {code = 1;
+        deep = 0;
+        target = 4;
+        movecounter = 0;
+        genmove ();
+        if (movecounter == 0)
+        {if (ischeck () )
+        {infoBox("You have crushed Chessmaster!\n You must be a Grandmaster!","Game Status");
+            destroy();}
+        else
+        {infoBox("Game is a draw!","Game Status");
+            destroy();}
+            return;	}
+        execute ( move / 100, move % 100 );
+        Graphics g=getGraphics();
+        g.drawRect((move / 100)*80,(move % 100)*80,80,80);
+        g.setColor(Color.green);
+        g.fillRect(start*80,end*80,80,80);
+        code = 0;}
+    public void simulate (int start, int end) {
+        if ((board [end] == 99) || (board [end] % 100 / 10 == color))
+            return;
+        if (ababort)return;
+        int orgstart = board [start];
+        int orgend = board [end];
+        board [end] = board [start];
+        board [start] = 0;
+        if ((board [end] % 10 == 1) && ((end < 29) || (end > 90)))board [end] += 4;
+        if (! ischeck ())
+        {if (deep == 1)
+        {movelist [movecounter] = start * 100 + end;
+            movecounter++;}
+            if (target == deep)
+                value = evaluation ();
+            else
+            {if (color == 1)color = 2;
+            else color = 1;
+                genmove ();
+                value = minimax [deep + 1];
+                if (deep % 2 != 0)
+                {if (value < alphabeta [deep])
+                    alphabeta [deep] = value;}
+                else
+                {if (value > alphabeta [deep])
+                    alphabeta [deep] = value;}
+                if (color == 1)color = 2;
+                else color = 1;}
+            if (deep % 2 == 0)
+            {if (value > minimax [deep] )
+                minimax [deep] = value;
+                if (value > alphabeta [deep - 1])
+                    ababort = true;}
+            else
+            {if (value <= minimax [deep] )
+            {minimax [deep] = value;
+                if (deep == 1)
+                    move = start * 100 + end;}
+                if (value < alphabeta [deep - 1])
+                    ababort = true;}}
+        board [start] = orgstart;
+        board [end] = orgend;}
+    public void infoBox(String infoMessage, String location)
+    {JOptionPane.showMessageDialog(null, infoMessage,location, JOptionPane.INFORMATION_MESSAGE);
+    }}

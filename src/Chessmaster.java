@@ -1,14 +1,15 @@
 import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+
 public class Chessmaster extends Applet implements ActionListener
-{Board brain;Button b1,b2,b3;
+{Board brain;JButton b1,b2,b3;
     public void init()
     {super.init();
-        b1=new Button("START NEW GAME");
-        b2=new Button("OFFER DRAW");
-        b3=new Button("RESIGN");
+        b1=new JButton("START NEW GAME");
+        b2=new JButton("OFFER DRAW");
+        b3=new JButton("RESIGN");
         b1.setBounds(800,150,170,40);
         b2.setBounds(800,250,170,40);
         b3.setBounds(800,350,170,40);
