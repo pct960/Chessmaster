@@ -408,4 +408,21 @@ public class Board extends Applet
         genmove ();
         code = 0;}
 }
+    public void paint (Graphics g) {
+        for ( int i = 21; i < 99; i++)
+        {paintField (i);
+            if ( i%10 == 8)i += 2;}}
+    public void paintField (int index)
+    {Graphics g = getGraphics ();
+        int x = (index - 21) % 10;
+        int y = (index - 21) / 10;
+        if ( (x*11 + y) % 2 == 0)
+            g.setColor( white );
+        else
+            g.setColor( brown );
+        g.fillRect ( x * 80, y * 80, 80, 80);
+        try
+        {g.drawImage (pieces [graphboard [index] % 100 - 10], x * 80, y * 80, 80, 80, parent);
+        }
+        catch (ArrayIndexOutOfBoundsException e) {}	}
 }

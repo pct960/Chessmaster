@@ -33,7 +33,7 @@
         <entry file="file://$PROJECT_DIR$/src/Board.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="228">
-              <caret line="379" column="0" lean-forward="true" selection-start-line="379" selection-start-column="0" selection-end-line="379" selection-end-column="0" />
+              <caret line="360" column="44" lean-forward="true" selection-start-line="360" selection-start-column="44" selection-end-line="360" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -230,7 +230,7 @@
       <option name="presentableId" value="Default" />
       <updated>1483282410940</updated>
       <workItem from="1483282414523" duration="476000" />
-      <workItem from="1483282979872" duration="687000" />
+      <workItem from="1483282979872" duration="820000" />
     </task>
     <task id="LOCAL-00001" summary="Initialised board class">
       <created>1483283096416</created>
@@ -281,11 +281,18 @@
       <option name="project" value="LOCAL" />
       <updated>1483456441217</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Feature: Game can be restarted now">
+      <created>1483456499235</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1483456499235</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1163000" />
+    <option name="totallyTimeSpent" value="1296000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1922" height="1056" extended-state="6" />
@@ -334,7 +341,8 @@
     <MESSAGE value="isCheck() and isValid() for moves added" />
     <MESSAGE value="Mouse events handled" />
     <MESSAGE value="Multisimulate method added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Multisimulate method added" />
+    <MESSAGE value="Feature: Game can be restarted now" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feature: Game can be restarted now" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -356,7 +364,7 @@
     <entry file="file://$PROJECT_DIR$/src/Board.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
-          <caret line="379" column="0" lean-forward="true" selection-start-line="379" selection-start-column="0" selection-end-line="379" selection-end-column="0" />
+          <caret line="360" column="44" lean-forward="true" selection-start-line="360" selection-start-column="44" selection-end-line="360" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
